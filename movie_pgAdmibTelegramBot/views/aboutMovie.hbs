@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/aboutMovie.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   
+</head>
+
+
+<body>
+    <div class="textd">Description</div>
+    <div class="main">
+        <div class="dblock">
+            <p class="dword">{{ movie.name }} </p>
+            {{ movie.description }} <br><br>
+            <hr>
+            Стоимость : {{ movie.price }} <br>
+        </div>
+
+        <div class="bblock">
+            <div class="row_num">
+                <p class="row_text">Ряд 1</p>
+
+                <button type="submit" class="seat_btn" id="r1s1" onclick="seat_num(this.id)">1</button>
+                <button type="submit" class="seat_btn" id="r1s2" onclick="seat_num(this.id)">2</button>
+                <button type="submit" class="seat_btn" id="r1s3" onclick="seat_num(this.id)">3</button>
+                <button type="submit" class="seat_btn" id="r1s4" onclick="seat_num(this.id)">4</button>
+                <button type="submit" class="seat_btn" id="r1s5" onclick="seat_num(this.id)">5</button>
+                <button type="submit" class="seat_btn" id="r1s6" onclick="seat_num(this.id)">6</button>
+            </div>
+            <div class="row_num">
+                <p class="row_text">Ряд 2</p>
+                <button type="submit" class="seat_btn" id="r2s1" onclick="seat_num(this.id)">1</button>
+                <button type="submit" class="seat_btn" id="r2s2" onclick="seat_num(this.id)">2</button>
+                <button type="submit" class="seat_btn" id="r2s3" onclick="seat_num(this.id)">3</button>
+                <button type="submit" class="seat_btn" id="r2s4" onclick="seat_num(this.id)">4</button>
+                <button type="submit" class="seat_btn" id="r2s5" onclick="seat_num(this.id)">5</button>
+                <button type="submit" class="seat_btn" id="r2s6" onclick="seat_num(this.id)">6</button>
+            </div>
+            <div class="row_num">
+                <p class="row_text">Ряд 3</p>
+                <button type="submit" class="seat_btn" id="r3s1" onclick="seat_num(this.id)">1</button>
+                <button type="submit" class="seat_btn" id="r3s2" onclick="seat_num(this.id)">2</button>
+                <button type="submit" class="seat_btn" id="r3s3" onclick="seat_num(this.id)">3</button>
+                <button type="submit" class="seat_btn" id="r3s4" onclick="seat_num(this.id)">4</button>
+                <button type="submit" class="seat_btn" id="r3s5" onclick="seat_num(this.id)">5</button>
+                <button type="submit" class="seat_btn" id="r3s6" onclick="seat_num(this.id)">6</button>
+            </div>
+            <div class="row_num">
+                <p class="row_text">Ряд 4</p>
+                <button type="submit" class="seat_btn" id="r4s1" onclick="seat_num(this.id)">1</button>
+                <button type="submit" class="seat_btn" id="r4s2" onclick="seat_num(this.id)">2</button>
+                <button type="submit" class="seat_btn" id="r4s3" onclick="seat_num(this.id)">3</button>
+                <button type="submit" class="seat_btn" id="r4s4" onclick="seat_num(this.id)">4</button>
+                <button type="submit" class="seat_btn" id="r4s5" onclick="seat_num(this.id)">5</button>
+                <button type="submit" class="seat_btn" id="r4s6" onclick="seat_num(this.id)">6</button>
+            </div>
+        </div>
+
+
+        <input type="text" id="movieId" hidden value="{{movie.id}}">
+        <input type="text" id="username" class="usernameInput" placeholder="username">
+        <button type="submit" id="bookBtn" class="bookbtn">book</button>
+
+    </div>
+
+</body>
+
+<script>
+
+    let bookBtn = document.getElementById("bookBtn");
+    bookBtn.addEventListener("click", function () {
+
+        console.log(rowSeat);
+        booking();
+    })
+    let rowSeat = 0;
+    function seat_num(clicked_id) {
+        rowSeat = clicked_id;
+        return rowSeat;
+
+    }
+    function booking() {
+        console.log(rowSeat);
+        $.ajax({
+            url: "/movies/booking",
+            method: "post",
+            data: {
+                userName: document.getElementById("username").value,
+                movieId: document.getElementById("movieId").value,
+                rowSeat: rowSeat,
+
+            },
+            success: function () {
+                console.log("working")
+            }
+        })
+    }
+</script>
+
+</html>
